@@ -37,3 +37,10 @@ docker exec -it oracle11g impdp ..
 
 # 搜索查找rhel docker 镜像
 https://access.redhat.com/search/#/container-images?q=rhel&p=1&sort=relevant&rows=12&srch=any&documentKind=ImageRepository
+
+docker save oracle11g > oracle11g.tar
+
+docker load oracle11g.tar
+
+registry.access.redhat.com/rhel6.7
+registry.access.redhat.com/rhel7.1 

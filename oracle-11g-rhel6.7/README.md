@@ -34,3 +34,9 @@ docker run --privileged --name oracle11g -p 1521:1521 -v <install_folder>:/insta
 ```sh
 docker exec -it oracle11g impdp ..
 ```
+
+
+linux.x64_11gR2_database_1of2.zip 
+linux.x64_11gR2_database_2of2.zip
+registry.access.redhat.com/rhel6.7
+registry.access.redhat.com/rhel7.1

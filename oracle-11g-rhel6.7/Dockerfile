@@ -1,5 +1,5 @@
 FROM registry.access.redhat.com/rhel6.7 
-MAINTAINER jaspeen
+MAINTAINER frere921
 
 ADD assets /assets
 
