@@ -44,3 +44,20 @@ docker load oracle11g.tar
 
 registry.access.redhat.com/rhel6.7
 registry.access.redhat.com/rhel7.1 
+
+
+解决github push错误The requested URL returned error: 403 Forbidden while accessing  
+
+[git@AYZ github01]$ git push -u origin master
+error: The requested URL returned error: 403 Forbidden while accessing https://github.com/iopqrst/learn20140823.git/info/refs
+
+在要推送项目的文件目录下：
+vi .git/config
+
+# 将
+
+[remote "origin"]  
+    url = https://github.com/iopqrst/learn20140823.git
+修改为：
+[remote "origin"]
+url = https://iopqrst@github.com/iopqrst/learn20140823.git
