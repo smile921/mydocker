@@ -1,5 +1,7 @@
 set -e
 
+mv /assets/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+
 source /assets/colorecho
 trap "echo_red '******* ERROR: Something went wrong.'; exit 1" SIGTERM
 trap "echo_red '******* Caught SIGINT signal. Stopping...'; exit 2" SIGINT
