@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="前言" class="slide level1">
+<h1>前言</h1>
+<p>这是我推荐的学习Haskell之路。</p>
+<h4 id="请切记别在不懂的地方打转先继续读下去">请切记：<em>别在不懂的地方打转，先继续读下去！</em></h4>
+<h2 id="社群">社群</h2>
+<p>IRC频道是Freenode上的<code>#haskell-beginners</code>。</p>
+<p>IRC web版用户端可<a href="http://webchat.freenode.net/">在这里取得</a>。</p>
+<p>Haskell<a href="https://wiki.haskell.org/Mailing_lists">邮件群组</a>。</p>
+<h3 id="社群参与原则">社群参与原则</h3>
+<p>请参考Chris Done所撰：<a href="http://chrisdone.com/posts/teaching">Teaching</a>。</p>
+<p>请友善待人，尖酸苛薄只会把人吓跑、令人不愿再参与而已。</p>
+<p>低劣的批评只让你自己痛快，对听者毫无帮助。</p>
+<p>别说『这很简单』、『这没什么』。这会让人觉得要花这么多功夫来弄懂是因为自不如人，学得慢的人通常是学得最全面的人，这值得称赞！</p>
+<p>当别人承认他不知道的时候，不要故作惊讶。这会让他难过，而你除了表现得好像很行，什么也没得到。</p>
+<p>不要说『其实...这样才对...』(well, actually...)。当有人说了什么『几乎正确』的话，而你说些『其实...这样才对』来做些枝微末节的修正，这很恼人，尤其这常常跟整个讨论根本八竿子打不着。我并不是在说人们不在乎精确，只是像这样的发言通常是作秀成分居多，而非为了追寻真实。</p>
+</section>
+<section class="slide level1">
+
+<p>以上部分内容来自<a href="https://www.recurse.com/manual">the Recurse Center手册</a>。感谢他们愿意公开分享！</p>
+</section>
+<section id="什么是haskellghc和cabal" class="slide level1">
+<h1>什么是Haskell、GHC和Cabal？</h1>
+<p>Haskell的规格可在下面这篇报告找到，此报告最新版本为2010版： <a href="http://www.haskell.org/onlinereport/haskell2010/">onlinereport</a></p>
+<h2 id="ghc">GHC</h2>
+<p><a href="http://www.haskell.org/ghc/">GHC</a>是Haskell语言的主流工具选择。它包含编译器、直译器、套件管理，与其他辅助工具。</p>
+<h2 id="cabal">Cabal</h2>
+<p><a href="https://www.haskell.org/cabal/download.html">Cabal</a>可用来做专案管理与套件相依性解析。 这会是你用来安装专案、套件的主要工具，其常见的做法是安装到专属的沙箱(cabal sandbox)中。</p>
+<p>Cabal相当于Ruby Bundler、Python pip、Node NPM、Maven等等。你可以用GHC来打包套件，Cabal则可用来选择你想要的版本安装。</p>
+</section>
+<section id="环境设定" class="slide level1">
+<h1>环境设定</h1>
+<h2 id="ubuntu">Ubuntu</h2>
+<p><a href="http://launchpad.net/~hvr/+archive/ghc">这个PPA</a>很棒，我在我所有的Linux环境与建置用机器上都靠它。</p>
+<p>详细设定步骤如下：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> apt-get update
+$ <span class="kw">sudo</span> apt-get install python-software-properties <span class="co"># v12.04 and below</span>
+$ <span class="kw">sudo</span> apt-get install software-properties-common <span class="co"># v12.10 and above</span>
+$ <span class="kw">sudo</span> add-apt-repository -y ppa:hvr/ghc
+$ <span class="kw">sudo</span> apt-get update
+$ <span class="kw">sudo</span> apt-get install cabal-install-1.20 ghc-7.8.4 happy-1.19.4 alex-3.1.3</code></pre></div>
+<p>接着，把以下路径加入你的<code>$PATH</code>环境变数中(bash_profile, zshrc, bashrc, etc)：</p>
+<pre><code>~/.cabal/bin:/opt/cabal/1.20/bin:/opt/ghc/7.8.4/bin:/opt/happy/1.19.4/bin:/opt/alex/3.1.3/bin</code></pre>
+<p><em>注:</em> 你不妨把<code>.cabal-sandbox/bin</code>加到你的路径中。如此一来，只要你使用沙箱(cabal sandbox)开发，并且 留在专案的工作路径中，你就可以在命令列中轻易取用你正在开发的二进位档。</p>
+<h2 id="debian">Debian</h2>
+<h3 id="使用ubuntu-ppa">使用Ubuntu PPA</h3>
+<p>如果不打算使用官方提供的稳定版本，你可以用上面提过和Ubuntu一样的流程，但会需要在下面这个命令后：</p>
+<p><code>sudo add-apt-repository -y ppa:hvr/ghc</code> 加上：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> sed -is/jessie/trusty/g /etc/apt/sources.list.d/hvr-ghc-jessie.list</code></pre></div>
+<p>其他的Debian版本，只需将<code>jessie</code>都换成你的版本名即可。</p>
+<p>如果<code>/etc/apt/sources.list.d/hvr-ghc-jessie.list</code>不存在，那么<code>/etc/apt/sources.list</code>应该会有：</p>
+<pre><code>deb http://ppa.launchpad.net/hvr/ghc/ubuntu jessie main</code></pre>
+<p>把上列<code>jessie</code>换成<code>trusty</code>即可。</p>
+<h3 id="自行编译">自行编译</h3>
+<p>请参照这篇为Mac OSX所撰的指南：</p>
+<p>请注意：</p>
+<ul>
+<li>根据你个人的工作环境，设定ghc时指定目录前缀(prefix)</li>
+<li>不要直接下载<code>cabal-install</code>的二进位档，请下载源码并执行其<code>bootstrap.sh</code>脚本。</li>
+</ul>
+<h2 id="fedora-21">Fedora 21</h2>
+<p>从非官方套件库安装Haskell 7.8.4 (Fedora 22以上已经有官方版本)：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> yum-config-manager --add-repo \
+<span class="kw">&gt;</span> https://copr.fedoraproject.org/coprs/petersen/ghc-7.8.4/repo/fedora-21/petersen-ghc-7.8.4-fedora-21.repo 
+$ <span class="kw">sudo</span> yum install ghc cabal-install</code></pre></div>
+<p>根据<a href="https://copr.fedoraproject.org/coprs/petersen/ghc-7.8.4/">petersen/ghc-7.8.4 copr page</a>，此版本的ghc 无法与Fedora/EPEL ghc并存。</p>
+<h2 id="arch-linux">Arch Linux</h2>
+<p>从官方套件库安装：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> pacman -S cabal-install ghc happy alex haddock</code></pre></div>
+<h2 id="gentoo">Gentoo</h2>
+<p>你可以透过Portage来分别安装Haskell Platform的各个组件。如果你使用<code>ACCEPT_KEYWORDS=arch</code>，而非<code>ACCEPT_KETWORDS=~arch</code>， Portage会弄个老旧的Haskell给你。因此，举凡用了<code>ACCEPT_KEYWORDS=arch</code>，请把下面这几行加进去：</p>
+<pre><code>dev-haskell/cabal-install
+dev-lang/ghc</code></pre>
+<p>接着请执行：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">emerge</span> -jav dev-lang/ghc dev-haskell/cabal-install</code></pre></div>
+<p>Gentoo会留一个『稳定』(换言之：老旧）的<code>cabal-install</code>在Portage的套件树中，你可以利用这个<code>cabal-install</code>来安装 新版的<code>cabal-install</code>。请注意，以下反斜线是必须的：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ \<span class="kw">cabal</span> update <span class="co"># The backslashes</span>
+$ \<span class="kw">cabal</span> install cabal-install <span class="co"># are intentional</span></code></pre></div>
+<p>如此一来，你便透过Protage在系统中安装了cabal，又在你的个人环境中安装了最新的<code>cabal-install</code>。 下一步是确定每次你在终端机执行<code>cabal</code>时，你的shell都是执行你个人环境中的最新版本：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">PATH=$PATH</span>:<span class="ot">$HOME</span>/.cabal/bin
+<span class="kw">alias</span> cabal=<span class="st">&quot;</span><span class="ot">$HOME</span><span class="st">/.cabal/bin/cabal&quot;</span></code></pre></div>
+<p>不知道你的shell是哪一个？那你很可能用的是Bash。如果你用的是Bash，你需要编辑<code>~/.bashrc</code>。 如果是Z-shell，则是<code>~/.zshrc</code>，可用以下面命令来查询：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> <span class="ot">$SHELL</span> <span class="kw">|</span> <span class="kw">xargs</span> basename</code></pre></div>
+<p>例如我用的是zsh，所以上列命令会输出<code>zsh</code>。</p>
+<p>当以上都完成，请再另外安装两个工具：<code>alex</code>和<code>happy</code>：</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cabal</span> install alex happy</code></pre></div>
+<p>恭喜！你有了一个正常运作的Haskell！</p>
+<h2 id="mac-os-x">Mac OS X</h2>
+<h3 id="section">10.9</h3>
+<p>请安装<a href="http://ghcformacosx.github.io/">GHC for Mac OS X</a>，它包含了GHC与Cabal。安装完成后， 它会指示你如何将GHC与Cabal加入你的系统路径。</p>
+<h3 id="section-1">10.6-10.8</h3>
+<p>请下载这个<a href="https://www.haskell.org/platform/download/2014.2.0.0/ghc-7.8.3-x86_64-apple-darwin-r3.tar.bz2">tarball</a>， 并安装其包含的二进位版。</p>
+<h2 id="windows">Windows</h2>
+<ul>
+<li><a href="http://neilmitchell.blogspot.com/2014/12/beta-testing-windows-minimal-ghc.html">windows minimal GHC installer</a> 它可以用来编译<code>network</code>等套件，虽然严格说它还在beta，但应该足够让任何读这篇导览的人使用。</li>
+</ul>
+<p>别忘了，要用系统管理者的身份来安装，因为它需要新增到Program Files的权限。</p>
+<h2 id="其他linux使用者">其他Linux使用者</h2>
+<p>下载cabal与ghc的最新版二进位档。</p>
+<ul>
+<li><p><a href="http://www.haskell.org/ghc/">GHC</a>.</p></li>
+<li><p><a href="https://www.haskell.org/cabal/download.html">Cabal</a>.</p></li>
+</ul>
+</section>
+<section id="主要学习课程" class="slide level1">
+<h1>主要学习课程</h1>
+<h2 id="yorgeys-cis194课程">Yorgey's cis194课程</h2>
+<blockquote>
+<p><em>请先透过这门课学习</em>，这是我最推荐入门Haskell的课。</p>
+</blockquote>
+<p>此课程的教材可于<a href="http://www.seas.upenn.edu/~cis194/spring13/lectures.html">线上取得</a>。</p>
+<p><a href="https://byorgey.wordpress.com">Brent Yorgey</a>的课是我目前所知最好的。它之所以好，因为 它不只教你些基础知识，还教你parser combinators。</p>
+<p>如果你不是个程式设计师，或缺乏经验，那么这门课可能没这么适合。建议你从 <a href="http://www.haskellcraft.com/craft3e/Home.html">Thompson的这本书</a>开始，然后再转到cis194。</p>
+</section>
+<section class="slide level1">
+
+<h2 id="nicta课程">NICTA课程</h2>
+<blockquote>
+<p>在你完成上述Yorgey的cis194后，我推荐继续挑战此课程。</p>
+</blockquote>
+<p>这门课发布在<a href="https://github.com/NICTA/course">github上</a>。</p>
+<p>透过实作cis194中所介绍过的种种抽象表述，你会有更深入的了解。这样的练习对于 熟悉Haskell中每天都会面对的Functor/Applicative/Monad等等至关重要。 先做cis194，紧接着NICTA，是这整篇Haskell学习导览的核心，也是我​​教每个人Haskell的方式。</p>
+</section>
+<section class="slide level1">
+
+<h2 id="补充课程cs240h">补充课程cs240h</h2>
+<blockquote>
+<p>提供更多中阶以上议题的教材</p>
+</blockquote>
+<p><a href="http://www.scs.stanford.edu/14sp-cs240h/">线上教材</a></p>
+<p>这是<a href="https://github.com/bos">Bryan O'Sullivan</a>在Stanford所教课程的线上版。 如果你不知道他是谁，去翻翻Haskell的函式库吧！几乎一半以上常用的套件都有他的名字。 特别是phantom types、information flow control、language extensions、concurrency、pipes和lenses。</p>
+</section>
+<section class="slide level1">
+
+<h3 id="do-list-comprehension简便语法到底是什么"><code>&lt;-</code> / <code>do</code> / list comprehension简便语法到底是什么？</h3>
+<p><a href="http://www.haskellforall.com/2014/10/how-to-desugar-haskell-code.html">很棒的解释</a>。</p>
+<h3 id="了解list和fold">了解list和fold</h3>
+<ul>
+<li><a href="http://vimeo.com/64673035">Explain List Folds to Yourself</a></li>
+</ul>
+<h3 id="学习常用的typeclasses">学习常用的typeclasses</h3>
+<p>对了解<code>Functor</code>、<code>Applicative</code>、<code>Monad</code>、`Monoid｀和其他typeclasses很有帮助，而且还有 些针对Haskell的范畴论(category theory)的解释：</p>
+<ul>
+<li><a href="http://www.haskell.org/haskellwiki/Typeclassopedia">Typeclassopedia</a></li>
+</ul>
+<h3 id="了解基本的haskell错误讯息">了解基本的Haskell错误讯息</h3>
+<ul>
+<li><a href="http://ics.p.lodz.pl/~stolarek/_media/pl:research:stolarek_understanding_basic_haskell_error_messages.pdf">Understanding basic error messages</a></li>
+</ul>
+</section>
+<section id="laziness-strictness-guarded-recursion" class="slide level1">
+<h1>Laziness, strictness, guarded recursion</h1>
+<ul>
+<li><p><a href="http://chimera.labs.oreilly.com/books/1230000000929/ch02.html">Marlow关于平行与同步的书</a>中，关于laziness与normal form的介绍 是我所看过最好的。如果没有立即理解，不妨搭配以下补充材料。</p></li>
+<li><p><a href="http://augustss.blogspot.hu/2011/05/more-points-for-lazy-evaluation-in.html">More points for lazy evaluation</a></p></li>
+<li><p><a href="http://alpmestan.com/posts/2013-10-02-oh-my-laziness.html">Oh my laziness!</a></p></li>
+<li><p>SO上的讨论串'<a href="http://stackoverflow.com/questions/13042353/does-haskell-have-tail-recursive-optimization">Does haskell have laziness?</a>'</p></li>
+<li><p><a href="https://github.com/tibbe">Johan Tibell</a>'在<a href="http://www.slideshare.net/tibbe/reasoning-about-laziness">reasoning about laziness</a>这个演讲的投影片</p></li>
+</ul>
+<h2 id="演示">演示</h2>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> a <span class="fu">=</span> <span class="dv">1</span> <span class="fu">:</span> a <span class="co">-- guarded recursion, (:) is lazy and can be pattern matched.</span>
+<span class="kw">let</span> (v <span class="fu">:</span> _) <span class="fu">=</span> a
+<span class="fu">&gt;</span> v
+<span class="dv">1</span>
+<span class="fu">&gt;</span> head a <span class="co">-- head a == v</span>
+<span class="dv">1</span>
+
+<span class="kw">let</span> a <span class="fu">=</span> <span class="dv">1</span> <span class="fu">*</span> a <span class="co">-- not guarded, (*) is strict</span>
+<span class="fu">&gt;</span> a
+<span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="fu">&lt;&lt;</span>loop<span class="fu">&gt;&gt;</span></code></pre></div>
+</section>
+<section id="io" class="slide level1">
+<h1>IO</h1>
+<ul>
+<li><p><a href="https://www.fpcomplete.com/user/snoyberg/general-haskell/advanced/evaluation-order-and-state-tokens">Evaluation order and State tokens</a></p></li>
+<li><p><a href="http://blog.ezyang.com/2011/05/unraveling-the-mystery-of-the-io-monad/">Unraveling the mystery of the IO monad</a>.</p></li>
+<li><p><a href="http://blog.jle.im/entry/first-class-statements">First class &quot;statements&quot;</a>.</p></li>
+<li><p><a href="http://hackage.haskell.org/package/base-4.7.0.1/docs/System-IO-Unsafe.html#v:unsafePerformIO">Haddocks for System.IO.Unsafe.unsafePerformIO</a> 请读unsafeDupablePerformIO的文件和实作笔记。</p></li>
+</ul>
+<p><code>glaebhoerl</code>在Reddit讨论串的留言：</p>
+<blockquote>
+<p>有趣的补充笔记: GHC需要将state token representation隐藏在抽象的IO型别后面， 因为state token必须线性地使用，不能复制或丢弃，但型别系统无法强制这件事。 某个干净、lazy、类似Haskell的语言的型别有uniqueness特性(类似linear type，但可能有些 我没意识到的细微差别)，为了方便，它直接暴露World-passing并提供非抽象的IO monad。</p>
+</blockquote>
+</section>
+<section id="monads-and-monad-transformers" class="slide level1">
+<h1>Monads and monad transformers</h1>
+<blockquote>
+<p>在你了解typeclasses、Monoid、Functor和Applicative之前，请不要做下列练习！</p>
+</blockquote>
+<p>尝试自行实作标准函式库中的monads(List、Maybe、Cont、Error、Reader、Writer、State)，可以让你 更了解它们。再来，不妨尝试用下述技术实作一个小型expression language的monadic直译器： <a href="http://catamorph.de/documents/Transformers.pdf">Monad Transformers Step by Step</a>(在下列monad transformer章节亦有提及)</p>
+<p>透过用不同的monad改变语意，从而产生不同的直译器，help convey what's going on。</p>
+<ul>
+<li><a href="https://vimeo.com/73648150">Tony的演讲</a>完美演绎为何需要monad transformer， <a href="https://dl.dropboxusercontent.com/u/7810909/talks/monad-transformers/cbaa991e0eb49224eb286c1e418e2b9828e1fb21/monad-transformers.pdf">投影片在此</a>.</li>
+</ul>
+<p>再来，实作<code>Control.Monad</code>中的函数，例如：<code>mapM</code>或<code>sequence</code>是个练习撰写generic monadic code的好机会。</p>
+<p>前面提到过的NICTA课程也可以用来当这个过程的指南，它也包括了如何撰写你自己的Applicative。</p>
+<p>Credits:</p>
+<ul>
+<li><p>Reddit上htmltyp和Crandom的<a href="http://www.reddit.com/r/haskell/comments/29eke6/basic_program_ideas_for_learning_about_monads/cik5aj6">留言</a>。</p></li>
+<li><p>Reddit上jozefg<a href="http://www.reddit.com/r/haskell/comments/29eke6/basic_program_ideas_for_learning_about_monads/cik5trg">的留言</a>。</p></li>
+</ul>
+<h2 id="monad-transformers">Monad transformers</h2>
+<ul>
+<li><p><a href="https://github.com/kqr/gists/blob/master/articles/gentle-introduction-monad-transformers.md">A gentle introduction to Monad Transformers</a>。</p></li>
+<li><p><a href="http://catamorph.de/documents/Transformers.pdf">Monad Transformers Step by Step</a></p></li>
+</ul>
+</section>
+<section id="testing-tests-specs-generativeproperty-testing" class="slide level1">
+<h1>Testing, tests, specs, generative/property testing</h1>
+<ul>
+<li><p>Kazu Yamamoto的<a href="https://github.com/kazu-yamamoto/unit-test-example/blob/master/markdown/en/tutorial.md">这篇教学</a>堪称典范！</p></li>
+<li><p><a href="https://github.com/jwiegley/simple-conduit">Simple-Conduit</a>：这个简单的函式库对于学习IO串流如何工作很有帮助， 所学亦可应用在其他函式库，例如Pipes和Conduit。</p></li>
+</ul>
+</section>
+<section id="parsing-in-haskell" class="slide level1">
+<h1>Parsing in Haskell</h1>
+<ul>
+<li><p>Parser combinator <a href="https://github.com/JakeWheat/intro_to_parsing">tutorial</a> for Haskell using Parsec</p></li>
+<li><p><a href="http://olenhad.me/articles/monadic-parsers/">Writing your own micro-Parsec</a></p></li>
+</ul>
+<h2 id="parsing与产生json">Parsing与产生JSON</h2>
+<p>Aeson是Haskell标准的<a href="https://json.org">JSON</a>parsing解决方案。你可以从<a href="https://hackage.haskell.org/package/aeson">hackage</a>或<a href="https://github.com/bos/aeson">github</a>取得。</p>
+<ul>
+<li><p><a href="http://blog.raynes.me/blog/2012/11/27/easy-json-parsing-in-haskell-with-aeson/">Parsing JSON using Aeson</a></p></li>
+<li><p><a href="http://bitemyapp.com/posts/2014-04-11-aeson-and-user-created-types.html">Aeson and user created types</a></p></li>
+<li><p><a href="http://bitemyapp.com/posts/2014-04-17-parsing-nondeterministic-data-with-aeson-and-sum-types.html">Parsing non-deterministic data with aeson and sum types</a></p></li>
+<li><p><a href="https://www.fpcomplete.com/school/starting-with-haskell/libraries-and-frameworks/text-manipulation/json">Aeson教学</a></p></li>
+</ul>
+</section>
+<section id="图学演算法与资料结构" class="slide level1">
+<h1>图学演算法与资料结构</h1>
+<ul>
+<li><p><a href="https://hackage.haskell.org/package/fgl">fgl套件</a>。纯函数式的最短路径<a href="http://hackage.haskell.org/package/fgl-5.4.2.2/docs/Data-Graph-Inductive-Query-SP.html">演算法</a>值得一看。</p></li>
+<li><p><a href="http://web.engr.oregonstate.edu/~erwig/papers/abstracts.html#JFP01">Inductive graphs and Functional Graph Algorithms</a>.</p></li>
+<li><p><a href="http://web.engr.oregonstate.edu/~erwig/fgl/haskell/old/fgl0103.pdf">FGL/Haskell - A Functional Graph Library</a>.</p></li>
+<li><p><a href="http://hackage.haskell.org/package/containers-0.5.5.1/docs/Data-Graph.html">Containers套件中的Data.Graph源码</a>.</p></li>
+<li><p><a href="https://hackage.haskell.org/package/graphs">graphs套件</a>.</p></li>
+<li><p><a href="http://stackoverflow.com/questions/24369954/separate-positive-and-negative-occurrences-of-phoas-variables-in-presence-of-rec">SO关于PHOAS的讨论串</a></p></li>
+<li><p><a href="https://www.fpcomplete.com/user/edwardk/phoas">免费的PHOAS</a>.</p></li>
+<li><p><a href="http://www.haskell.org/haskellwiki/Tying_the_Knot">Tying the Knot</a>.</p></li>
+<li><p><a href="https://hackage.haskell.org/package/dag">Hackage: dag</a>.</p></li>
+</ul>
+</section>
+<section id="开发环境" class="slide level1">
+<h1>开发环境</h1>
+<h2 id="emacs">Emacs</h2>
+<ul>
+<li><p><a href="https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md">Alejandro Serras's tutorial</a></p></li>
+<li><p><a href="https://github.com/bitemyapp/dotfiles/">My dotfiles</a></p></li>
+<li><p><a href="https://github.com/chrisdone/chrisdone-emacs">Chris Done's emacs config</a></p></li>
+</ul>
+<h2 id="vim">Vim</h2>
+<ul>
+<li><p><a href="http://www.haskell.org/haskellwiki/Vim">Vim page on haskellwiki</a></p></li>
+<li><p><a href="https://github.com/begriffs/haskell-vim-now">Haskell-vim-now</a></p></li>
+<li><p><a href="http://www.stephendiehl.com/posts/vim_haskell.html">A vim+haskell workflow</a></p></li>
+<li><p><a href="https://github.com/kazu-yamamoto/ghc-mod">GHC-Mod</a></p></li>
+<li><p><a href="https://github.com/eagletmt/ghcmod-vim">GHC-Mod vim plugin</a></p></li>
+<li><p><a href="https://github.com/chrisdone/hindent">Hindent</a></p></li>
+</ul>
+<h2 id="sublime-text">Sublime Text</h2>
+<ul>
+<li><a href="https://github.com/SublimeHaskell/SublimeHaskell">SublimeHaskell</a></li>
+</ul>
+</section>
+<section id="cabal常见问答" class="slide level1">
+<h1>Cabal常见问答</h1>
+<h2 id="一篇超赞的常见问答">一篇超赞的常见问答</h2>
+<p>不但对各种主题都有很好的导览，也包含了Cabal的一些重要基础。 - <a href="http://dev.stephendiehl.com/hask/">What I wish I knew when learning Haskell</a></p>
+<h2 id="cabal导览">Cabal导览</h2>
+<p>在引入沙箱(sandbox)前，Cabal地狱(Cabal Hell)对所有Haskell使用者来说都是一大问题。 在沙箱外安装的套件会直接装在你的用户套件资料库(user pacakge-db)中。除非是常用的基础套件， 例如Cabal、alex、happy等，这绝不是个好方法。除非你很清楚你自己在做什么，任何套件都不该 安装在用户资料裤或全域资料库(global package-db)。</p>
+<p>这里有些如何避免Cabal地狱的<a href="http://softwaresimply.blogspot.com/2014/07/haskell-best-practices-for-avoiding.html">最佳指南</a>。</p>
+<p>如果要实验新套件，或是起始新专案，在一个新目录中执行<code>cabal sandbox init</code>。</p>
+<p>简言之：</p>
+<ul>
+<li>无论是安装新套件、建置新旧专案、做任何实验，请用沙箱。</li>
+<li>用<code>cabal repl</code>来启动project-scoped ghci实体。</li>
+</ul>
+<p>我所建议这种以沙箱为基础的方式，应该可以避免套件相依性的问题。但这与Haskell Platform提供 预先编译套件的方法不相容。如果你还在学习Haskell，而且不太了解ghc-pkg和Cabal如何运作， <em>不要用Haskell Platform</em>，改用前面所提的安装方式。</p>
+<h2 id="stackage">Stackage</h2>
+<p>如果你面临一些建置上的问题(特别是Yesod)，不妨考虑用Stackage：</p>
+<ul>
+<li><a href="https://www.fpcomplete.com/blog/2014/05/stackage-server">Stackage是什么</a></li>
+</ul>
+<p>据作者所言，Stackage通常比<code>cabal freeze</code>更实用。</p>
+</section>
+<section id="hoogle与haddock" class="slide level1">
+<h1>Hoogle与Haddock</h1>
+<h2 id="依型别表述搜寻源码">依型别表述搜寻源码</h2>
+<p><a href="http://www.haskell.org/hoogle/">Hoogle搜寻引擎</a>可依型别搜寻。</p>
+<p>比方说，请看以下搜寻<code>(a -&gt; b) -&gt; [a] -&gt; [b]</code>的结果：</p>
+<p><a href="http://www.haskell.org/hoogle/?hoogle=%28a+-%3E+b%29+-%3E+%5ba%5d+-%3E+%5bb%5d">搜寻结果</a>.</p>
+<p>fpcomplete所管理的<a href="https://www.fpcomplete.com/hoogle">在此</a>。</p>
+<p>另外<a href="http://holumbus.fh-wedel.de/hayoo/hayoo.html">Hayoo</a>预设开启了对所有hackage的搜寻。</p>
+<h2 id="设定你自己本地端的hoogle">设定你自己本地端的Hoogle</h2>
+<p>详细方法请看<a href="https://gist.github.com/bitemyapp/3e6a015760775e0679bf">这篇文章</a>。</p>
+<h2 id="haddock">Haddock</h2>
+<ol type="1">
+<li><p>修正你的hackage文件<a href="http://fuuzetsu.co.uk/blog/posts/2014-01-06-Fix-your-Hackage-documentation.html">Fix your hackage documentation</a></p></li>
+<li><p>Hackage文件第二版<a href="http://fuuzetsu.co.uk/blog/posts/2014-01-06-Hackage-documentation-v2.html">Hackage documentation v2</a></p></li>
+</ol>
+<p>请注意，以上这些文章都<em>有些过期</em>，例如：现在Hacakge已支援shiny new info with documentation info and build status.</p>
+<h2 id="真正重要的事">真正重要的事</h2>
+<p>为了让haddocks含入相关套件的文件，你必须在<code>~/.cabal/config</code>设立<code>ducumentation: True</code>。如果它被设为<code>False</code>，或间接被default(<code>False</code>)关闭，你会需要删除并重新安装所有套件，再产生haddocks。</p>
+<p>请记住，因为<code>$pkg</code>参数会被cabal内插，<code>html-location</code>和<code>content-location</code>参数<em>必须以单引号括入</em>，再插入shell命令或包含在shell脚本中。在Makefile中是不行的，因为它会被当作Make的变数！</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#! /usr/bin/env sh</span>
+
+<span class="co"># 如果把反斜线去掉，你可以把它写成一行</span>
+<span class="kw">cabal</span> haddock --hoogle --hyperlink-source \
+ --html-location=<span class="st">&#39;http://hackage.haskell.org/package/$pkg/docs&#39;</span> \
+ --contents-location=<span class="st">&#39;http://hackage.haskell.org/package/$pkg&#39;</span></code></pre></div>
+</section>
+<section id="travisci" class="slide level1">
+<h1>TravisCI</h1>
+<p>如果你跟我一样，是<a href="https://travis-ci.org">TravisCI</a>的超级粉丝，那我<em>强力建议</em>你参考<a href="https://github.com/hvr%20/multi-ghc-travis">multi-ghc-travis</a>为你的Haskell专案的<code>travis.yml</code>设定档做基础。</p>
+</section>
+<section id="前端javascript" class="slide level1">
+<h1>前端/JavaScript</h1>
+<p>我们的选择多得惊人！我个人推荐三种：</p>
+<ul>
+<li><a href="http://haste-lang.org/">Haste</a> Haskell至JavaScript的编译器。a H​​askell to JavaScript compiler</li>
+<li><a href="https://github.com/valderman/haste-compiler">Github</a>上的编译器源码</li>
+<li><p>范例专案的<a href="http://www.airpair.com/haskell/posts/haskell-tutorial-introduction-to-web-apps">精彩展示</a></p></li>
+<li><a href="https://github.com/ghcjs/ghcjs">GHCJS</a></li>
+<li>GHCJS简介<a href="http://weblog.luite.com/wordpress/?p=14">GHCJS Introduction</a></li>
+<li><a href="http://weblog.luite.com/wordpress/?p=127">Functional Reactive Web Interfaces with GHCJS and Sodium</a></li>
+<li><p>用Haskell搭配ghcjs撰写A​​tom插件<a href="http://edsko.net/2015/02/14/atom-haskell/">Writing Atom plugins in Haskell using ghcjs</a></p></li>
+<li><a href="http://www.purescript.org/">PureScript</a></li>
+<li>不像Haste或GHCJS般是纯Haskell，但是Haskller们的热门选择</li>
+<li>以Haskell实作，亦受Haskell启发</li>
+<li>在浏览器上<a href="http://try.purescript.org/">试试</a></li>
+<li><p><a href="http://www.christopherbiscardi.com/2014/06/22/getting-started-with-purescript/">起步导览</a></p></li>
+</ul>
+<h2 id="我用哪一种前端语言">我用哪一种前端语言？</h2>
+<p>GHCJS和Haste都是纯Haskell，GHCJS比Haste能和更多的Haskell套件相容，但这不会影响大多数的前端专案。PureScript并非Haskell，因此无法直接和你的后端分享源码。</p>
+<p>GHCJS的执行期payload是最大的，大约100kb (luite正在研究如何解决此问题)，Haste则和PureScript差不多。</p>
+<p>PureScript有最好的JS工具链整合(用gulp/grunt/bower)，GHCJS和Haste则与Haskell工具链整合较佳(例如Cabal)。</p>
+<p>以上三者都是极佳选择，大多数的前端专案都适用。</p>
+</section>
+<section id="想要更充分了解lazinessnfwhnf" class="slide level1">
+<h1>想要更充分了解laziness、NF、WHNF</h1>
+<ul>
+<li><a href="https://vec.io/posts/notes-on-lambda-calculus">Notes on lambda calculus</a>.</li>
+</ul>
+<h2 id="关于lazy-lambda-calculus的研究论文">关于lazy lambda calculus的研究论文</h2>
+<ul>
+<li><p><a href="http://homepages.inf.ed.ac.uk/wadler/topics/call-by-need.html#need-journal">A call by need lambda calculus</a>.</p></li>
+<li><p><a href="http://www.itu.dk/~sestoft/papers/sestoft-lamreduce.pdf">Demonstrating Lambda Calculus Reduction</a></p></li>
+<li><p><a href="http://www.cs.ox.ac.uk/files/293/lazy.pdf">The lazy lambda calculus</a>.</p></li>
+<li><p><a href="http://www.vex.net/~trebla/haskell/lazy.xhtml">Lazy evaluation of Haskell</a></p></li>
+</ul>
+</section>
+<section id="平行并行parallelismconcurrency" class="slide level1">
+<h1>平行／并行(Parallelism/Concurrency)</h1>
+<ul>
+<li><p><a href="http://chimera.labs.oreilly.com/books/1230000000929">Parallel and Concurrent Programming in Haskell</a>。在我所读过的文献中，Simon Marlow所撰的这本书是此主题的佼佼者。</p></li>
+<li><p><a href="http://kukuruku.co/hub/haskell/haskell-testing-a-multithread-application">这篇教学</a>带领你一步步学习如何用Haskell测试、渐进开发多绪应用程式。</p></li>
+<li><p><a href="http://www.haskell.org/haskellwiki/Functional_Reactive_Programming">Functional Reactive Programming</a></p></li>
+</ul>
+</section>
+<section id="lenses-and-prisms" class="slide level1">
+<h1>Lenses and Prisms</h1>
+<p>在你习惯Haskell后，我强烈建议你学习Lenses与Prisms。你不必了解底层的原理，只要当一个使用者，就很受用。</p>
+<p>大家普遍误会Lens是个很难用的东西，其实任何一个了解Functor/Foldable/Traversable，甚至只知道Functor的人，都可以运用Lenses与Prisms来让他们的开发生涯更快乐。</p>
+<p>如果你曾经做过：<code>(fmap . fmap)</code>，你其实已经有Lense的思维了。</p>
+<p>我推荐以下两篇教学：</p>
+<ul>
+<li><p><a href="https://www.fpcomplete.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial">A little lens starter tutorial</a></p></li>
+<li><p><a href="https://github.com/ekmett/lens#lens-lenses-folds-and-traversals">Le​​ns: Lenses, Folds and Traversals</a></p></li>
+</ul>
+<p>详细资料请看这里：<a href="http://hackage.haskell.org/package/lens">Lens package on hackage</a>.</p>
+</section>
+<section id="递回范式recursion-schemes" class="slide level1">
+<h1>递回范式(Recursion Schemes)</h1>
+<p>你一定听过些疯狂的『*-morphism』，他们其实只是递回。在尝试搞懂前，你应该要先知道如何实作list至少一种其他资料结构的foldr，例如tree (folds叫做catamorphisms)。再进一步了解如何在以上资料结构实作unfold (anamorphism)会让整体知识完善些。</p>
+<p>以下资料与traversable和foldable的概念相合。</p>
+<ul>
+<li><p><a href="http://patrickthomson.ghost.io/an-introduction-to-recursion-schemes/">An introduction to recursion schemes</a></p></li>
+<li><p><a href="http://fho.f12n.de/posts/2014-05-07-dont-fear-the-cat.html">Don't fear the cat</a> - Good demonstration of how hylomorphism is the composition of cata and ana.</p></li>
+<li><p><a href="http://comonad.com/reader/2009/recursion-schemes/">Recursion Schemes</a> - This field guide is excellent.</p></li>
+<li><p><a href="http://eprints.eemcs.utwente.nl/7281/01/db-utwente-40501F46.pdf">Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire</a></p></li>
+<li><p><a href="https://www.fpcomplete.com/user/edwardk/recursion-schemes/catamorphisms">Catamorphisms</a></p></li>
+</ul>
+</section>
+<section id="ghc核心与效能调校" class="slide level1">
+<h1>GHC核心与效能调校</h1>
+<ul>
+<li><p><a href="write_haskell_as_fast_as_c.md">Write Haskell as Fast as C</a></p></li>
+<li><p><a href="https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/CoreSynType">GHC Wiki: CoreSyn Type</a>.</p></li>
+<li><p><a href="https://hackage.haskell.org/package/ghc-core">Hackage: GHC Core</a>.</p></li>
+<li><p><a href="http://stackoverflow.com/questions/6121146/reading-ghc-core">SO Question: Reading GHC Core</a>.</p></li>
+<li><p><a href="http://donsbot.wordpress.com/2008/06/04/haskell-as-fast-as-c-working-at-a-high-altitude-for-low-level%20-performance/">Haskell as fast as C</a>.</p></li>
+<li><p><a href="http://book.realworldhaskell.org/read/profiling-and-optimization.html">Real World Haskell, Chapter 25: Profiling and Optimizations</a>.</p></li>
+</ul>
+</section>
+<section id="型别type与范畴论category-theory" class="slide level1">
+<h1>型别(Type)与范畴论(Category Theory)</h1>
+<blockquote>
+<p>写Haskell<em>不用学</em>，仅供有兴趣的人参考！</p>
+</blockquote>
+<p>如果你想开始学习型别与范畴论：</p>
+<ul>
+<li><p><a href="http://byorgey.wordpress.com/2014/01/14/catsters-guide/">Catster's Guide</a> and <a href="http://byorgey.wordpress.com/catsters-guide-2/">Catster's Guide 2</a></p></li>
+<li><p><a href="http://en.wikibooks.org/wiki/Haskell/Category_theory">haskell wikibook</a> 有不错的图解。</p></li>
+<li><p>Haskellwiki上的<a href="http://www.haskell.org/haskellwiki/Category_theory">Category Theory</a>也有不错的参考资料。</p></li>
+<li><p><a href="http://science.raphael.poss.name/categories-from-scratch.html">Categories from scratch</a>，有实例。</p></li>
+<li><p>Pierce的<a href="http://www.cis.upenn.edu/~bcpierce/courses/670Fall04/GreatWorksInPL.shtml">Great Works in PL</a>列表。</p></li>
+</ul>
+<h2 id="书籍">书籍</h2>
+<ul>
+<li><p>Kmett推荐：<a href="http://www.quora.com/Category-Theory/What-is-the-best-textbook-for-Category-theory?share%20=1">Quora Question: What is the best textbook for category theory?</a></p></li>
+<li><p><a href="http://ukcatalogue.oup.com/product/9780199237180.do">Awodey</a>和 <a href="http://www.amazon.com/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038">MacLane</a>。范畴学的标准教科书。</p></li>
+<li><p><a href="http://www.cs.cmu.edu/~rwh/plbook/book.pdf">Harper's Practical Foundations for Programming Languages​​</a>是我读过以程式语言角度切入的最佳介绍。</p></li>
+<li><p><a href="http://www.cs.kent.ac.uk/people/staff/sjt/TTFP/">Type theory and Functional Programming</a>.</p></li>
+</ul>
+<h2 id="stephen俏皮的how-to-get-to-monad文章">Stephen俏皮的&quot;How to get to monad&quot;文章</h2>
+<ul>
+<li><p><a href="http://www.stephendiehl.com/posts/adjunctions.html">Adjunctions</a>.</p></li>
+<li><p>[Monads]​​(http://www.stephendiehl.com/posts/monads.html).</p></li>
+</ul>
+</section>
+<section id="其他有趣的主题" class="slide level1">
+<h1>其他有趣的主题</h1>
+<h2 id="parametricity-ad-hoc-vs.-parametric-polymorphism-free-theorems">Parametricity, ad-hoc vs. parametric polymorphism, free theorems</h2>
+<ul>
+<li><p><a href="tony_parametricity.pdf">Parametricity</a>.</p></li>
+<li><p><a href="https://github.com/tonymorris/parametricity/">TeX sources</a>上述演讲的TeX源。</p></li>
+<li><p><a href="http://swizec.com/blog/week-20-making-ad-hoc-polymorphism-less-ad-hoc/swizec/6564">Making ad-hoc polymorphism less ad-hoc</a>.</p></li>
+<li><p><a href="http://ttic.uchicago.edu/~dreyer/course/papers/wadler.pdf">Theorems for Free!</a>.</p></li>
+</ul>
+<h2 id="initial与finaldsls与tagless">Initial与Final、DSLs、与Tagless</h2>
+<ul>
+<li><p><a href="http://creativelad.wordpress.com/2013/11/28/final-encodings-part-1-a-quick-demonstration/">Final Encodings, Part 1: A Quick Demonstration</a>.</p></li>
+<li><p><a href="http://martijn.van.steenbergen.nl/journal/2009/10/18/transforming-polymorphic-values​​/">Transforming Polymorphic Values​​</a>.</p></li>
+<li><p><a href="http://martijn.van.steenbergen.nl/journal/2009/11/12/gadts-in-haskell-98/">GADTs in Haskell 98</a>.</p></li>
+<li><p><a href="https://www.fpcomplete.com/user/mutjida/typed-tagless-final-linear-lambda-calculus">Typed Tagless-Final Linear Lambda Calculus</a>.</p></li>
+<li><p><a href="http://okmij.org/ftp/tagless-final/course/course.html">Typed tagless-final interpretations: Lecture notes</a>.</p></li>
+<li><p><a href="http://okmij.org/ftp/tagless-final/course/lecture.pdf">Typed Tagless Final Interpreters</a>.</p></li>
+<li><p><a href="http://existentialtype.wordpress.com/2011/03/21/the-dog-that-didnt-bark/">The dog that didn't bark</a>较无相关，但非常有趣。</p></li>
+</ul>
+<h2 id="comonads">Comonads</h2>
+<ul>
+<li><p><a href="https://speakerdeck.com/dmoverton/comonads-in-haskell">Comonads in Haskell</a>.</p></li>
+<li><p><a href="http://stackoverflow.com/questions/16551734/can-a-monad-be-a-comonad">SO question: Can a Monad be a Comonad</a>.</p></li>
+</ul>
+<h2 id="yoneda-coyoneda">Yoneda / CoYoneda</h2>
+<ul>
+<li><p><a href="http://stackoverflow.com/questions/24000465/step-by-step-deep-explain-the-power-of-coyoneda-preferably-in-scala%20-throu">SO question: Step-by-step explanation of coyoneda</a>.</p></li>
+<li>Free monads for Less, Edward Kmett的系列文章</li>
+<li><a href="http://comonad.com/reader/2011/free-monads-for-less/">Part 1: Codensity</a>.</li>
+<li><a href="http://comonad.com/reader/2011/free-monads-for-less-2/">Part 2: Yoneda</a>.</li>
+<li><p><a href="http://comonad.com/reader/2011/free-monads-for-less-3/">Part 3: Yielding IO</a>.</p></li>
+</ul>
+<h2 id="propositions-vs.-judgments-computation">Propositions vs. Judgments (computation)</h2>
+<ul>
+<li><p><a href="http://cstheory.stackexchange.com/questions/9826/what-is-the-difference-between-propositions-and-judgments">StackExchange question: What is the difference between propositions and judgements</a>.</p></li>
+<li><p><a href="http://www.ae-info.org/attach/User/Martin-L%C3%B6f_Per/OtherInformation/article.pdf">Le​​cture notes from a short, three lecture course</a></p></li>
+</ul>
+</section>
+<section id="dependent-typing" class="slide level1">
+<h1>Dependent typing</h1>
+<ul>
+<li><p><a href="http://bitemyapp.com/posts/2014-04-05-grokking-sums-and-constructors.html">Grokking sum types, value constructors, and type constructors</a> squint hard.</p></li>
+<li><p><a href="http://okmij.org/ftp/Computation/lightweight-dependent-typing.html">Lightweight Dependent-type Programming</a>.</p></li>
+<li><p><a href="http://www.idris-lang.org/">Idris programming language</a>.</p></li>
+</ul>
+</section>
+<section id="静态连结二元档statically-linking-binaries" class="slide level1">
+<h1>静态连结二元档Statically linking binaries</h1>
+<ul>
+<li><p><a href="https://wiki.haskell.org/Web/Literature/Static_linking">Static linking</a></p></li>
+<li><p><a href="http://www.edofic.com/posts/2014-05-03-ghc-arch-static.html">Static linking with GHC on Arch Linux</a></p></li>
+<li><p><a href="http://stackoverflow.com/questions/14270177/ghc-statically-linking-linux-binaries-for-arm-mips-processors">Statically linking Linux binaries for ARM &amp; MIPS</a></p></li>
+<li><p><a href="http://stackoverflow.com/questions/10539857/statically-link-gmp-to-an-haskell-application-using-ghc-llvm">Statically link GMP using GHC and LLVM</a></p></li>
+</ul>
+</section>
+<section id="补充资料" class="slide level1">
+<h1>补充资料</h1>
+<blockquote>
+<p>有部分已在本文提及</p>
+</blockquote>
+<ul>
+<li><a href="http://www.stephendiehl.com/posts/essential_haskell.html">Essential Haskell Reading List</a></li>
+</ul>
+<h2 id="对话记录">对话记录</h2>
+<blockquote>
+<p>在<a href="dialogues.md">本储存库中</a>。</p>
+</blockquote>
+<p>里面有些非常重要而有帮助的资讯，可协助你深入了解许多不同的议题。</p>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

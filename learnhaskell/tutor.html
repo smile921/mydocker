@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="how-to-learn-haskell">How to learn Haskell</h1>
+<p>This is a recommended path for learning Haskell based on experience helping others.</p>
+<h2 id="for-non-english-speakers">For non-English speakers</h2>
+<ul>
+<li><a href="guide-de.md">Auf Deutsch</a></li>
+</ul>
+<!-- * [Στην ελληνική](guide-el.md) -->
+<ul>
+<li><p><a href="guide-es.md">En Español</a></p></li>
+<li><p><a href="guide-fr.md">En Français</a></p></li>
+<li><p><a href="guide-it.md">In Italiano</a></p></li>
+<li><p><a href="guide-pt.md">Em Português</a></p></li>
+<li><p><a href="guide-zh_tw.md">繁體中文</a></p></li>
+<li><p><a href="guide-zh_CN.md">简体中文</a></p></li>
+<li><p><a href="guide-ru.md">По-русски</a></p></li>
+<li><p><a href="guide-ua.md">Українською</a></p></li>
+</ul>
+<h4 id="dont-sweat-the-stuff-you-dont-understand-immediately.-keep-moving"><em>Don't sweat the stuff you don't understand immediately</em>. Keep moving!</h4>
+<h2 id="community">Community</h2>
+<p>Our IRC channel is <code>#haskell-beginners</code> on Freenode.</p>
+<p>IRC web client <a href="http://webchat.freenode.net/">here</a>.</p>
+<p>The haskell <a href="https://wiki.haskell.org/Mailing_lists">mailing lists</a>.</p>
+<h3 id="community-guidelines">Community Guidelines</h3>
+<p>See <a href="coc.md">the community guidelines</a> to understand the conduct that is expected in the IRC channel. You'll get a warning if you're not obviously trolling, but be aware the channel is exclusively for those learning or teaching Haskell.</p>
+<h1 id="installing-haskell">Installing Haskell</h1>
+<h2 id="use-stack-to-get-going-with-haskell">Use Stack to get going with Haskell</h2>
+<p>Get <a href="http://haskellstack.org">Stack</a> to get GHC installed and to build your projects.</p>
+<p>If you don't know anything about Stack and would like an overview, check out this <a href="https://www.youtube.com/watch?v=sRonIB8ZStw">comprehensive Stack video tutorial</a>.</p>
+<h2 id="also-do-not-install-haskell-platform">Also, DO NOT INSTALL HASKELL PLATFORM</h2>
+<p>Instead of following the instructions on Haskell.org, get Stack.</p>
+<h3 id="why-not-platform">Why not platform?</h3>
+<p>https://mail.haskell.org/pipermail/haskell-community/2015-September/000014.html</p>
+<h1 id="how-should-i-learn-haskell">How should I learn Haskell?</h1>
+<p>The core recommendation is to read the lectures and complete all exercises/homework for the Spring 13 version of cis194 followed by the NICTA course. Both are linked below. Everything else can be considered optional and is mentioned so you know where to look.</p>
+<h2 id="yorgeys-cis194-course">Yorgey's cis194 course</h2>
+<blockquote>
+<p><em>Do this first</em>, this is the primary way we recommend being introduced to Haskell.</p>
+</blockquote>
+<p>Available <a href="http://www.seas.upenn.edu/~cis194/spring13/lectures.html">online</a>.</p>
+<p><a href="https://byorgey.wordpress.com">Brent Yorgey</a>'s course is the best I've found so far. This course is valuable as it will not only equip you to write basic Haskell but also help you to understand parser combinators.</p>
+<p>The only reason you shouldn't start with cis194 is if you are not a programmer or are an inexperienced one. If that's the case, start with <a href="http://www.haskellcraft.com/craft3e/Home.html">Thompson's book</a> and transition to cis194.</p>
+<hr />
+<h2 id="nicta-course">NICTA course</h2>
+<blockquote>
+<p>This is the course we recommend doing after Yorgey's cis194 course</p>
+</blockquote>
+<p>Available on github <a href="https://github.com/NICTA/course">here</a>.</p>
+<p>This will reinforce and give you experience directly implementing the abstractions introduced in cis194, this is practice which is <em>critical</em> to becoming comfortable with everyday uses of Functor/Applicative/Monad/etc. in Haskell. Doing cis194 and then the NICTA course represents the core recommendation of my guide and is how we teach everyone Haskell.</p>
+<hr />
+<h2 id="supplementary-course-after-cis194-and-the-nicta-course">Supplementary course after cis194 and the NICTA course</h2>
+<blockquote>
+<p>Provides more material on intermediate topics</p>
+</blockquote>
+<p>cs240h is available <a href="http://www.scs.stanford.edu/14sp-cs240h/">online</a>.</p>
+<p>This is <a href="https://github.com/bos">Bryan O'Sullivan</a>'s online course from the class he teaches at Stanford. If you don't know who he is, take a gander at half the libraries any Haskell application ends up needing and his name is on it. Of particular note if you've already done the Yorgey course are the modules on phantom types, information flow control, language extensions, concurrency, pipes, and lenses.</p>
+<hr />
+<h1 id="resources-for-specific-topics-in-haskell">Resources for specific topics in Haskell</h1>
+<p>These resources are not vetted or tested with learners as cis194 and NICTA course have been, but they're linked in <a href="specific_topics.md">the topic listing</a> so you have ideas on where to begin. This includes things like intermediate/advanced concepts and subjects like tooling and text editors.</p>
+<h2 id="dialogues">Dialogues</h2>
+<blockquote>
+<p>Hosted in this repository <a href="dialogues.md">here</a>.</p>
+</blockquote>
+<p>These are actually pretty important and helpful. Look here for deep dives on a variety of topics.</p>
+</body>
+</html>
